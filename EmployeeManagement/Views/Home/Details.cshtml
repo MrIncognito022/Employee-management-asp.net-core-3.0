@@ -1,0 +1,24 @@
+﻿@model EmployeeManagement.ViewModels.HomeDetailsViewModel;
+
+
+<html>
+<head>
+    <title></title>
+</head>
+
+
+<body>
+    <div class="container">
+        <h3 class="bg-danger">@ViewBag.PageTitle</h3>
+        <div>
+            Name: @Model.Employee.Name
+        </div>
+        <div>
+            Email: @Model.Employee.Email
+        </div>
+        <div>
+            Department: @Model.Employee.Department
+        </div>
+    </div>
+</body>
+</html>
