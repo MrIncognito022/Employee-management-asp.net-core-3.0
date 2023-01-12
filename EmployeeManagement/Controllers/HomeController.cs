@@ -23,7 +23,7 @@ namespace EmployeeManagement.Controllers
             var model = _employeeRepository.GetAllEmployee();
             return View(model);
         }
-        public IActionResult Details()
+        public IActionResult Details(int id)
         {
             HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
             {
