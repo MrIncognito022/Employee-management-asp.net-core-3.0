@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Employee Details";
 }
-
+  
 <div class="row justify-content-center m-3">
     <div class="col-sm-8">
         <div class="card">
@@ -12,7 +12,7 @@
             </div>
 
             <div class="card-body text-center">
-                <img class="card-img-top" src="~/images/pic6.jpg" />
+                <img class="card-img-top" src="~/images/pic6.jpg" asp-append-version="true" />
 
                 <h4>Employee ID : @Model.Employee.Id</h4>
                 <h4>Email: @Model.Employee.Email</h4>
