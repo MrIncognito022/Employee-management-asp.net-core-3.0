@@ -12,9 +12,12 @@
                 <h3>@employee.Name</h3>
             </div>
             <img class="card-img-top" src="~/images/pic6.jpg" />
-
             <div class="card-footer text-center">
-                <a href="#" class="btn btn-primary">Views</a>
+                @*<a href="@Url.Action("details","home", new{id=employee.Id}) "></a>
+                @Html.ActionLink("View","details","Home",new {id=employee.Id})*@
+               
+                <a asp-controller = "Home" asp-action="Details" asp-route-id="@employee.Id"
+                class = "btn btn-primary">View</a>
                 <a href="#" class="btn btn-primary">Edit</a>
                 <a href="#" class="btn btn-danger">Delete</a>
             </div>
