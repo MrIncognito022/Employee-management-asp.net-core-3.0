@@ -2,7 +2,15 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <environment include ="Development">
     <link href = "~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    </environment>
+    <environment include ="Staging, Production">
+         @*Load from the cdn*@
+    </environment>
+    <environment exclude = "Development">
+        @*Link from the cdn*@
+    </environment>
     <link href = "~/css/site.css" rel="stylesheet" />
     <title>@ViewBag.Title</title>
 </head>
