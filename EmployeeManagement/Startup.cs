@@ -1,6 +1,7 @@
 using EmployeeManagement.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,12 +25,15 @@ namespace EmployeeManagement
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-           // services.AddSingleton<IEmployeeRepository, MockEmployeeRepository>();
-            services.AddScoped<IEmployeeRepository, MockEmployeeRepository>();
+            // services.AddSingleton<IEmployeeRepository, MockEmployeeRepository>();
+            services.AddScoped<IEmployeeRepository, SQLEmployeeRepository>();
             //services.AddTransient<IEmployeeRepository, MockEmployeeRepository>();
+
+            services.AddDbContextPool<AppDbContext>(options => options.UseSqlServer(
+                Configuration.GetConnectionString("EmployeeDBConnection")));
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        // This method gets called by the runti me. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
