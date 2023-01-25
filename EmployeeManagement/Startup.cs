@@ -24,8 +24,8 @@ namespace EmployeeManagement
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddSingleton<IEmployeeRepository, MockEmployeeRepository>();
-            //services.AddScoped<IEmployeeRepository, MockEmployeeRepository>();
+           // services.AddSingleton<IEmployeeRepository, MockEmployeeRepository>();
+            services.AddScoped<IEmployeeRepository, MockEmployeeRepository>();
             //services.AddTransient<IEmployeeRepository, MockEmployeeRepository>();
         }
 
