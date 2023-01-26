@@ -2,11 +2,11 @@
 
 namespace EmployeeManagement.Models
 {
-    
+
     public class SQLEmployeeRepository : IEmployeeRepository
     {
         private readonly AppDbContext context;
-        public SQLEmployeeRepository (AppDbContext context)
+        public SQLEmployeeRepository(AppDbContext context)
         {
             this.context = context;
         }
@@ -20,11 +20,11 @@ namespace EmployeeManagement.Models
         public Employee Delete(int id)
         {
             Employee employee = context.Employees.Find(id);
-            if(employee != null)
+            if (employee != null)
             {
                 context.Employees.Remove(employee);
             }
-            context.SaveChanges ();
+            context.SaveChanges();
             return employee;
         }
 
@@ -41,7 +41,7 @@ namespace EmployeeManagement.Models
 
         public Employee Update(Employee employeechanges)
         {
-           var employee =  context.Employees.Attach(employeechanges);
+            var employee = context.Employees.Attach(employeechanges);
             employee.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             context.SaveChanges();
             return employeechanges;

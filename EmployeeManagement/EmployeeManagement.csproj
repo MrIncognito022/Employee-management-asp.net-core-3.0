@@ -5,6 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20230126050638_RemoveSomePropertyColumn.cs" />
+    <Compile Remove="Migrations\20230126050638_RemoveSomePropertyColumn.Designer.cs" />
+    <Compile Remove="Migrations\20230126052914_AddedNewProperty.cs" />
+    <Compile Remove="Migrations\20230126052914_AddedNewProperty.Designer.cs" />
+    <Compile Remove="Migrations\20230126055931_AddedNewProp.cs" />
+    <Compile Remove="Migrations\20230126055931_AddedNewProp.Designer.cs" />
+    <Compile Remove="Migrations\20230126060525_AddPhotoPath.cs" />
+    <Compile Remove="Migrations\20230126060525_AddPhotoPath.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="3.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="3.1.0" />

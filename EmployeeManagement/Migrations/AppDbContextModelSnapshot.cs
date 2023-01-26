@@ -25,6 +25,9 @@ namespace EmployeeManagement.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("AddPhotoPath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Department")
                         .HasColumnType("int");
 
@@ -39,6 +42,22 @@ namespace EmployeeManagement.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Employees");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Department = 2,
+                            Email = "Ali123@outlook.com",
+                            Name = "Ali"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Department = 3,
+                            Email = "Kashifdfs@outlook.com",
+                            Name = "Kashif"
+                        });
                 });
 #pragma warning restore 612, 618
         }

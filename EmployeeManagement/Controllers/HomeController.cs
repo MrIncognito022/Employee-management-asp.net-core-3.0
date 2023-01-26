@@ -1,22 +1,27 @@
 ﻿using EmployeeManagement.Models;
 using EmployeeManagement.ViewModels;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace EmployeeManagement.Controllers
 {
     public class HomeController : Controller
-    { 
+    {
         private readonly IEmployeeRepository _employeeRepository;
+        private readonly IHostingEnvironment hostingEnvironment;
 
-        public HomeController(IEmployeeRepository employeeRepository)
+        public HomeController(IEmployeeRepository employeeRepository,
+                              IHostingEnvironment hostingEnvironment)
         {
             _employeeRepository = employeeRepository;
+            this.hostingEnvironment = hostingEnvironment;
         }
         public IActionResult Index()
         {
@@ -27,7 +32,7 @@ namespace EmployeeManagement.Controllers
         {
             HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
             {
-                Employee = _employeeRepository.GetEmployee(id??1),
+                Employee = _employeeRepository.GetEmployee(id ?? 1),
                 PageTitle = "Employee Details"
             };
             return View(homeDetailsViewModel);
@@ -38,14 +43,34 @@ namespace EmployeeManagement.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(Employee employee)
+        public IActionResult Create(EmployeeCreateViewModel model)
         {
-            if (ModelState.IsValid) 
-            { 
-            Employee newEmployee = _employeeRepository.Add(employee);
-            //return RedirectToAction("Details" ,new { id = newEmployee.Id });
+            if (ModelState.IsValid)
+            {
+                string uniqueFilename = null;
+                if (model.Photo != null)
+                {
+                    //To get physical path of wwwroot we use IhostingEnvirement
+                    string uploadsFolderPath = Path.Combine(hostingEnvironment.WebRootPath, "images");
+                    //We want filename in Images folder to be unique otherwise one file override the other
+                    //To ensure that use Guid (Global unique identifier)
+                    uniqueFilename = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
+                    string filepath = Path.Combine(uploadsFolderPath, uniqueFilename);
+                    model.Photo.CopyTo(new FileStream(filepath, FileMode.Create));
+                }
+                Employee newEmployee = new Employee
+                {
+                    Name = model.Name,
+                    Email = model.Email,
+                    Department = model.Department,
+                    AddPhotoPath = uniqueFilename
+                 };
+
+                _employeeRepository.Add(newEmployee);
+                return RedirectToAction("Details", new { id = newEmployee.Id });
             }
             return View();
         }
+
     }
 }
