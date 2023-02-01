@@ -42,6 +42,22 @@ namespace EmployeeManagement.Controllers
         {
             return View();
         }
+
+        public IActionResult Edit(int id)
+        {
+            Employee employee = _employeeRepository.GetEmployee(id);
+            EmployeeEditViewModel employeeEditViewModel = new EmployeeEditViewModel
+            {
+                Id = employee.Id,
+                Department = employee.Department,
+                Name = employee.Name,
+                Email = employee.Email,
+                //It is good to name  Property name here as Photopath
+                ExistingPhotoPath = employee.AddPhotoPath
+            };
+            return View(employeeEditViewModel);
+        }
+
         [HttpPost]
         public IActionResult Create(EmployeeCreateViewModel model)
         {
