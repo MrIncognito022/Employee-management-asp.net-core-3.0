@@ -42,7 +42,12 @@ namespace EmployeeManagement
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Error/");
+                //app.UseExceptionHandler("/Home/Error");
+                //Here we want to redirect user to Error Controller {} is the place holder. {0} automatically recieve the non-status code
+                //app.UseStatusCodePagesWithRedirects("/Error/{0}");
+                //app.UseStatusCodePagesWithReExecute("/Error/{0}");
+                //app.UseStatusCodePages();
             }
             app.UseStaticFiles();
 

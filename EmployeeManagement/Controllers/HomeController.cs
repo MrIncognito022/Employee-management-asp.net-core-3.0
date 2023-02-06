@@ -32,6 +32,7 @@ namespace EmployeeManagement.Controllers
 
         public IActionResult Details(int? id)
         {
+            //throw new Exception("Error in details View");
             Employee employee = _employeeRepository.GetEmployee(id.Value);
             if(employee == null)
             {
@@ -54,8 +55,6 @@ namespace EmployeeManagement.Controllers
             return View();
         }
 
-
-
         public IActionResult Edit(int id)
         {
             Employee employee = _employeeRepository.GetEmployee(id);
@@ -70,9 +69,6 @@ namespace EmployeeManagement.Controllers
             };
             return View(employeeEditViewModel);
         }
-
-
-
 
         [HttpPost]
         public IActionResult Create(EmployeeCreateViewModel model)
@@ -93,9 +89,6 @@ namespace EmployeeManagement.Controllers
             }
             return View();
         }
-
-
-
 
         [HttpPost]
         public IActionResult Edit(EmployeeEditViewModel model)
@@ -137,10 +130,6 @@ namespace EmployeeManagement.Controllers
             }
             return View();
         }
-
-
-
-
 
         private string ProcessUploadedFiles(EmployeeCreateViewModel model)
         {
